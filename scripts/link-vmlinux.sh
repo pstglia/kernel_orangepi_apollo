@@ -389,3 +389,9 @@ if [ -n "${CONFIG_KALLSYMS}" ]; then
 		exit 1
 	fi
 fi
+
+# https://github.com/awesometic/android_kernel_samsung_msm8996/commit/e2c8a5258256b375bca95f20086050087dea05b1#diff-25ea79d15e965219b8ffb7a294c4f8995de8fd646b1c8a18bbd0e8304a855e04
+if [ -f "${srctree}/link-vmlinux-preparation.sh" ]; then
+    ${srctree}/link-vmlinux-preparation.sh
+fi
+
