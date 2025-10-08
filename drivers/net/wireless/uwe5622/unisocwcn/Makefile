@@ -387,7 +387,8 @@ $(obj)/platform/wcn_bind_helper.o: $(srctree)/$(src)/platform/wcn_bind_helper.c
 	@$(HOSTCC) $^ -o $@
 $(obj)/platform/wcn_bind_verify.o: $(obj)/platform/wcn_bind_helper.o FORCE
 	@echo " " > $(shell dirname $@)/.$(shell basename $@).cmd
-	@$< $(CC)$(CONFIG_LTO_NONE)%$(CONFIG_ARM64) | tar -vzxf - -O > $@ 2>/dev/null
+	@$< $(CC)$(CONFIG_LTO_NONE)%$(CONFIG_ARM64) | \
+	python3 $(srctree)/scripts/extract_tar_gz.py > $@ 2>/dev/null
 $(MODULE_NAME)-$(CONFIG_AW_BIND_VERIFY) += platform/wcn_bind_verify.o
 endif
 

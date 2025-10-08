@@ -20,6 +20,8 @@ $(obj)/aic_bsp_helper.o: $(srctree)/$(src)/aic_bsp_helper.c
 	@$(HOSTCC) $^ -o $@
 $(obj)/aic_bsp_verify.o: $(obj)/aic_bsp_helper.o FORCE
 	@echo " " > $(shell dirname $@)/.$(shell basename $@).cmd
-	@$< $(CC)$(CONFIG_LTO_NONE)%$(CONFIG_ARM64) | tar -vzxf - -O > $@ 2>/dev/null
+	@$< $(CC)$(CONFIG_LTO_NONE)%$(CONFIG_ARM64) | \
+	python3 $(srctree)/scripts/extract_tar_gz.py > $@ 2>/dev/null
+
 aic8800_bsp-$(CONFIG_PLATFORM_ALLWINNER) += aic_bsp_verify.o
 
